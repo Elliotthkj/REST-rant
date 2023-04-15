@@ -1,3 +1,6 @@
+// Get the environment variables when using .env
+require("dotenv").config();
+
 // Require needed modules.
 const express = require("express");
 
@@ -11,7 +14,13 @@ app.get("/", function (req, res) {
   res.send("Hello world");
 });
 
-// Listen for connections.
-app.listen(3000, function () {
+//404 error handler
+app.get("*", function (req, res) {
+  res.send('<h1>404 Error</h1>');
+});
+
+// Listen for connections. 
+app.listen(process.env.PORT, function () {
   console.log("I am awake!");
 });
+
