@@ -23,9 +23,10 @@ app.get("/", function (req, res) {
 });
 
 //404 error handler
-app.get("*", function (req, res) {
-  res.send("<h1>404 Error</h1>");
+app.get("*", (req, res) => {
+  res.render("error404");
 });
+
 
 // Listen for connections.
 app.listen(process.env.PORT, function () {
