@@ -1,15 +1,15 @@
 // Get the environment variables when using .env
 require("dotenv").config();
-
 // Require needed modules.
 const express = require("express");
-
 // Initialize the app object.
 const app = express();
 
-// defines the view engine (JSX in this case)
+// Express Settings
+app.set('views', __dirname + '/views')
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
+app.use(express.static("public"));
 
 // places.js module
 const placesRouter = require("./controllers/places");
@@ -25,28 +25,6 @@ app.get("/", function (req, res) {
 //404 error handler
 app.get("*", (req, res) => {
   res.render("error404");
-});
-
-// index route
-app.get("/places", (req, res) => {
-  let places = [
-    {
-      name: "H-Thai-ML",
-      city: "Seattle",
-      state: "WA",
-      cuisines: "Thai, Pan-Asian",
-      pic: "http://placekitten.com/250/250",
-    },
-    {
-      name: "Coding Cat Cafe",
-      city: "Phoenix",
-      state: "AZ",
-      cuisines: "Coffee, Bakery",
-      pic: "http://placekitten.com/250/250",
-    },
-  ];
-
-  res.render("places/index", { places });
 });
 
 // Listen for connections.
