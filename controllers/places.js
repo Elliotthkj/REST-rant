@@ -1,6 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
+//new route
+router.get("/new", (req, res) => {
+  res.render("places/new");
+});
+
+
 // index route
 router.get("/", (req, res) => {
   let places = [
@@ -22,6 +28,7 @@ router.get("/", (req, res) => {
 
   res.render("places/index", { places });
 });
+
 
 // Export the router
 module.exports = router;
