@@ -5,18 +5,18 @@ const router = express.Router();
 router.get("/", (req, res) => {
   let places = [
     {
-      name: "H-Thai-ML",
-      city: "Seattle",
-      state: "WA",
-      cuisines: "Thai, Pan-Asian",
-      pic: "http://placekitten.com/250/250",
+      name: "JINYA Ramen Bar",
+      city: "Las Vegas",
+      state: "NV",
+      cuisines: "Japanese Ramen",
+      pic: "/images/jrb_ramen_tonkotsu-black.jpg",
     },
     {
-      name: "Coding Cat Cafe",
-      city: "Phoenix",
-      state: "AZ",
-      cuisines: "Coffee, Bakery",
-      pic: "http://placekitten.com/250/250",
+      name: "Express Hibachi",
+      city: "Las Vegas",
+      state: "NV",
+      cuisines: "Chinese",
+      pic: "/images/express_hibachi.jpg",
     },
   ];
 
