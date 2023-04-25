@@ -2,6 +2,16 @@ const express = require("express");
 const router = express.Router();
 const places = require("../models/places.js");
 
+// index route
+router.get("/", (req, res) => {
+  res.render("places/index", { places });
+});
+
+// new route
+router.get("/new", (req, res) => {
+  res.render("places/new");
+});
+
 // edit route
 router.get("/:id/edit", (req, res) => {
   let id = Number(req.params.id);
@@ -26,15 +36,9 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// new route
-router.get("/new", (req, res) => {
-  res.render("places/new");
-});
 
-// index route
-router.get("/", (req, res) => {
-  res.render("places/index", { places });
-});
+
+
 
 router.post("/", (req, res) => {
   console.log(req.body);
