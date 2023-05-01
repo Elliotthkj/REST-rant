@@ -7,13 +7,12 @@ const methodOverride = require("method-override");
 const app = express();
 
 // Express Settings
-app.set('views', __dirname + '/views')
-app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
-app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true }))
-app.use(methodOverride('_method'))
-
+app.set("views", __dirname + "/views");
+app.set("view engine", "jsx");
+app.engine("jsx", require("express-react-views").createEngine());
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 // places.js module
 const placesRouter = require("./controllers/places");
@@ -25,7 +24,6 @@ app.get("/", function (req, res) {
   // (your web browser most likely!)
   res.render("home");
 });
-
 
 //404 error handler
 app.get("*", (req, res) => {
