@@ -1,14 +1,22 @@
+body {
+  background-color: lightblue;
+  text-align: center;
+}
+
 h1 {
   text-align: center;
   color: cornflowerblue;
 }
 
-#ramenpic {
-  width: 50rem;
+h2 {
+  color: lightblue;
 }
 
-#placeImage {
-  width: 600px;
+main {
+  margin-right: 20px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: white;
 }
 
 nav {
@@ -32,17 +40,65 @@ nav a {
 }
 
 nav a:hover {
-  color: pink;
+  color: lightblue;
   text-decoration: none;
 }
 
-body {
-  background-color: lightblue;
-  text-align: center;
+form {
+  display: inline;
 }
 
-main {
-  margin-right: 20px;
-  margin-left: 20px;
-  background-color: white;
+.inactive {
+  color: gray;
+}
+
+.border {
+  border: 1px solid gray;
+}
+
+img {
+  height: 20em;
+}
+
+#ramenpic {
+  width: 50rem;
+  height: auto;
+}
+
+.star-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  background-color: #ddd;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.star-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffd000;
+  cursor: pointer;
+  background-image: url("../images/star-solid.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px 20px;
+}
+
+.slider-container {
+  position: relative;
+}
+.slider-label {
+  position: absolute;
+  top: -23px;
+  width: 20px;
+  text-align: center;
+}
+.slider-label:last-child {
+  top: -23px;
+  right: 0px;
 }

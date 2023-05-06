@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// CREATE
+// CREATE place
 router.post("/", (req, res) => {
   db.Place.create(req.body)
     .then(() => {
@@ -47,21 +47,42 @@ router.get("/:id", (req, res) => {
 
 // EDIT
 router.put("/:id", (req, res) => {
-  res.send("PUT /places/:id stub");
+  db.Place.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+      res.redirect(`/places/${req.params.id}`);
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
 });
 
 // DELETE
 router.delete("/:id", (req, res) => {
-  res.send("DELETE /places/:id stub");
+  db.Place.findByIdAndDelete(req.params.id)
+    .then((place) => {
+      res.redirect("/places");
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
 });
 
-// GET edit form stub
+// GET edit form
 router.get("/:id/edit", (req, res) => {
-  res.send("GET edit form stub");
+  db.Place.findById(req.params.id)
+    .then((place) => {
+      res.render("places/edit", { place });
+    })
+    .catch((err) => {
+      res.render("error404");
+    });
 });
 
+// COMMENT route
 router.post("/:id/comment", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   req.body.rant = req.body.rant ? true : false;
   db.Place.findById(req.params.id)
     .then((place) => {
@@ -81,100 +102,20 @@ router.post("/:id/comment", (req, res) => {
     });
 });
 
-router.delete("/:id/rant/:rantId", (req, res) => {
-  res.send("GET /places/:id/rant/:rantId stub");
+// COMMENT DELETE route TODO: fix this
+router.delete("/:id/comment/:id", (req, res) => {
+  db.Comment.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect(`/places/${req.params.id}`); // redirecting with wrong :id
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
 });
 
+// router.delete("/:id/rant/:rantId", (req, res) => {
+//   res.send("GET /places/:id/rant/:rantId stub");
+// });
+
 module.exports = router;
-
-// // index route
-// router.get("/", (req, res) => {
-//   res.render("places/index", { places });
-// });
-
-// // new route
-// router.get("/new", (req, res) => {
-//   res.render("places/new");
-// });
-
-// // edit route
-// router.get("/:id/edit", (req, res) => {
-//   let id = Number(req.params.id);
-//   if (isNaN(id)) {
-//     res.render("error404");
-//   } else if (!places[id]) {
-//     res.render("error404");
-//   } else {
-//     res.render("places/edit", { place: places[id], id });
-//   }
-// });
-
-// // show route
-// router.get("/:id", (req, res) => {
-//   let id = Number(req.params.id);
-//   if (isNaN(id)) {
-//     res.render("error404");
-//   } else if (!places[id]) {
-//     res.render("error404");
-//   } else {
-//     res.render("places/show", { place: places[id], id });
-//   }
-// });
-
-// router.post("/", (req, res) => {
-//   console.log(req.body);
-//   if (!req.body.pic) {
-//     // Default image if one is not provided
-//     req.body.pic = "http://placekitten.com/400/400";
-//   }
-//   if (!req.body.city) {
-//     req.body.city = "Anytown";
-//   }
-//   if (!req.body.state) {
-//     req.body.state = "USA";
-//   }
-//   places.push(req.body);
-//   res.redirect("/places");
-// });
-
-// // delete route
-// router.delete("/:id", (req, res) => {
-//   let id = Number(req.params.id);
-//   if (isNaN(id)) {
-//     res.render("error404");
-//   } else if (!places[id]) {
-//     res.render("error404");
-//   } else {
-//     places.splice(id, 1);
-//     res.redirect("/places");
-//   }
-// });
-
-// // PUT route
-// router.put("/:id", (req, res) => {
-//   let id = Number(req.params.id);
-//   if (isNaN(id)) {
-//     res.render("error404");
-//   } else if (!places[id]) {
-//     res.render("error404");
-//   } else {
-//     // Dig into req.body and make sure data is valid
-//     if (!req.body.pic) {
-//       // Default image if one is not provided
-//       req.body.pic = "http://placekitten.com/400/400";
-//     }
-//     if (!req.body.city) {
-//       req.body.city = "Anytown";
-//     }
-//     if (!req.body.state) {
-//       req.body.state = "USA";
-//     }
-
-//     // Save the new data into places[id]
-//     places[id] = req.body;
-//     res.redirect(`/places/${id}`);
-//   }
-// });
-
-// // Export the router
-// module.exports = router;

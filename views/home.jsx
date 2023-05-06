@@ -7,7 +7,7 @@ function home() {
       <main>
         <h1>REST-rant</h1>
         <div>
-          <img src="/images/ramenpic.jpg" alt="Bowl o Ramen" id="ramenpic"/>
+          <img src="/images/ramenpic.jpg" alt="Bowl o Ramen" id="ramenpic" />
         </div>
         <div>
           Photo by <a href="https://unsplash.com/@goodeats_yqr">GoodEats YQR</a>{" "}
