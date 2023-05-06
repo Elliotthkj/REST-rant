@@ -2,12 +2,9 @@
 require("dotenv").config();
 const express = require("express");
 const methodOverride = require("method-override");
-
-// Initialize the app object.
 const app = express();
 
 // Express Settings
-app.set("views", __dirname + "/views");
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 app.use(express.static("public"));
@@ -20,8 +17,6 @@ app.use("/places", placesRouter);
 
 // Create a homepage route.
 app.get("/", function (req, res) {
-  // This gets sent to the client
-  // (your web browser most likely!)
   res.render("home");
 });
 

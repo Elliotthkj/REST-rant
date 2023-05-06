@@ -16,13 +16,29 @@ router.get("/", (req, res) => {
 
 // CREATE place
 router.post("/", (req, res) => {
+  if (req.body.pic === "") {
+    req.body.pic = undefined;
+  }
+  if (req.body.city === "") {
+    req.body.city = undefined;
+  }
+  if (req.body.state === "") {
+    req.body.state = undefined;
+  }
   db.Place.create(req.body)
     .then(() => {
       res.redirect("/places");
     })
     .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
+      if (err && err.name == "ValidationError") {
+        let message = "Validation Error: ";
+        for (var field in err.errors) {
+          message += `${field} was ${err.errors[field].value}. ${err.errors[field].message}\n`;
+        }
+        res.render("places/new", { message });
+      } else {
+        res.render("error404");
+      }
     });
 });
 
@@ -102,20 +118,16 @@ router.post("/:id/comment", (req, res) => {
     });
 });
 
-// COMMENT DELETE route TODO: fix this
-router.delete("/:id/comment/:id", (req, res) => {
-  db.Comment.findByIdAndDelete(req.params.id)
+// COMMENT DELETE route
+router.delete("/:id/comment/:commentId", (req, res) => {
+  db.Comment.findByIdAndDelete(req.params.commentId)
     .then(() => {
-      res.redirect(`/places/${req.params.id}`); // redirecting with wrong :id
+      res.redirect(`/places/${req.params.id}`); 
     })
     .catch((err) => {
       console.log("err", err);
       res.render("error404");
     });
 });
-
-// router.delete("/:id/rant/:rantId", (req, res) => {
-//   res.send("GET /places/:id/rant/:rantId stub");
-// });
 
 module.exports = router;
